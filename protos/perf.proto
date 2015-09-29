@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+option java_package = "ex.grpc";
+
+package perfmeasurements;
+
+service PerfService {
+  rpc SendInt (IntMessage) returns (IntReply) {}
+  rpc SendDouble(DoubleMessage) returns (DoubleReply) {}
+  rpc SendString(StringMessage) returns (StringReply) {}
+  rpc GetCollegeAdmission(StudentMessage) returns (StringReply) {}
+  //server streaming
+  rpc ListColleges(StringMessage) returns (stream StringReply) {}
+  //client streaming
+  rpc SendPreferences(stream StringMessage) returns (StringReply) {}
+}
+
+message IntMessage {
+  int32 number = 1;
+}
+
+message IntReply {
+  int32 replynumber = 1;
+}
+
+message DoubleMessage {
+  double number = 1;
+}
+
+message DoubleReply {
+  double replynumber = 1;
+}
+
+message StringMessage {
+  string stringmessage = 1;
+}
+
+message StringReply {
+  string stringreply = 1;
+}
+
+message StudentMessage {
+  double gpa = 1;
+  int32 num_classes = 2;
+}
